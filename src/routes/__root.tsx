@@ -1,14 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
+import { Outlet, Link, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -68,47 +59,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pan — Artisan Sandwiches & Paninis · Downtown Fayetteville" },
-      { name: "description", content: "Hand-crafted sandwiches, paninis and salads made with locally-sourced ingredients. 105 Hay St, Fayetteville, NC. 4.9 stars on Google." },
-      { property: "og:title", content: "Pan — Artisan Sandwiches & Paninis · Downtown Fayetteville" },
-      { property: "og:description", content: "Hand-crafted sandwiches, paninis and salads made with locally-sourced ingredients. 105 Hay St, Fayetteville, NC. 4.9 stars on Google." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Pan — Artisan Sandwiches & Paninis · Downtown Fayetteville" },
-      { name: "twitter:description", content: "Hand-crafted sandwiches, paninis and salads made with locally-sourced ingredients. 105 Hay St, Fayetteville, NC. 4.9 stars on Google." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6add2d85-2c70-4aa5-b9e2-9b36d2c3b6ec/id-preview-5047f7f8--7b95d937-4e7f-4c88-a5d1-6f52b8d6e4a6.lovable.app-1778773349857.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6add2d85-2c70-4aa5-b9e2-9b36d2c3b6ec/id-preview-5047f7f8--7b95d937-4e7f-4c88-a5d1-6f52b8d6e4a6.lovable.app-1778773349857.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
