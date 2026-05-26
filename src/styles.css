@@ -1,0 +1,115 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-tan: var(--tan);
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Pan brand palette pulled from logo */
+  --cream: oklch(0.94 0.025 85);            /* aged paper */
+  --ink: oklch(0.32 0.035 150);             /* deep forest green */
+  --tan: oklch(0.72 0.075 75);              /* sun-faded tan */
+
+  --background: oklch(0.96 0.018 85);
+  --foreground: oklch(0.28 0.03 150);
+
+  --card: oklch(0.94 0.025 85);
+  --card-foreground: oklch(0.28 0.03 150);
+  --popover: oklch(0.96 0.018 85);
+  --popover-foreground: oklch(0.28 0.03 150);
+
+  --primary: oklch(0.32 0.035 150);
+  --primary-foreground: oklch(0.96 0.018 85);
+  --secondary: oklch(0.72 0.075 75);
+  --secondary-foreground: oklch(0.28 0.03 150);
+
+  --muted: oklch(0.9 0.022 80);
+  --muted-foreground: oklch(0.45 0.025 145);
+  --accent: oklch(0.72 0.075 75);
+  --accent-foreground: oklch(0.28 0.03 150);
+
+  --destructive: oklch(0.55 0.18 30);
+  --destructive-foreground: oklch(0.96 0.018 85);
+
+  --border: oklch(0.32 0.035 150 / 0.18);
+  --input: oklch(0.32 0.035 150 / 0.2);
+  --ring: oklch(0.32 0.035 150 / 0.4);
+}
+
+.dark {
+  --background: oklch(0.22 0.02 150);
+  --foreground: oklch(0.94 0.025 85);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { font-size: 17px; }
+  @media (min-width: 768px) { html { font-size: 18px; } }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "kern";
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+  /* Subtle paper grain background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+      radial-gradient(oklch(0.32 0.035 150 / 0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.6;
+  }
+}
+
+@layer utilities {
+  .grain {
+    background-image: radial-gradient(oklch(0.32 0.035 150 / 0.06) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  .torn-edge {
+    -webkit-mask-image: radial-gradient(circle at 4px 4px, black 3px, transparent 4px);
+    mask-image: radial-gradient(circle at 4px 4px, black 3px, transparent 4px);
+  }
+}
